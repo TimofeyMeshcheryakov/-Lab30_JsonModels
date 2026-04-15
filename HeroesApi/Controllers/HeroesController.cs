@@ -32,6 +32,12 @@ public class HeroesController : ControllerBase {
             WriteIndented = true,
             Converters = { new JsonStringEnumConverter() }
         };
-return
+        return Ok(new {
+            withDefaultSettings = JsonSerializer.Deserialize<object>(
+        JsonSerializer.Serialize(hero, defaulOptions), defaulOptions),
+            withOurSettings = JsonSerializer.Deserialize<object>(
+        JsonSerializer.Serialize(hero, ourOptions), ourOptions),
+            note = "Сравните имена полей и значение universe в двух вариантах"
+            });
+        }
     };
-}
